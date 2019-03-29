@@ -31,11 +31,11 @@
   [people]
   (sort-by (fn [person] (get-age person)) people))
 
-(defn repeat
+(defn repeat1
   [c n]
   (if (= n 1)
       (str c "\n")
-      (str c (repeat c (- n 1)))))
+      (str c (repeat1 c (- n 1)))))
 
 (defn get-header
   [column-names]
@@ -65,9 +65,9 @@
   [title column-names records]
   (str
     title "\n"
-    (repeat "-" 41)
+    (repeat1 "-" 41)
     (get-header column-names)
-    (repeat "-" 41)
+    (repeat1 "-" 41)
     (reduce
       (fn [rows row]
         (str rows (get-row row)))
