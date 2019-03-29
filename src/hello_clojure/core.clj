@@ -77,7 +77,7 @@
 (defn show-table
   []
   (println
-    (get-table
+    (table/create
       "Seinfeld Cast"
       ["Character" "Actor" "Age"]
       [{:character "George Costanza" :actor "Jason Alexander"  :age 25}
