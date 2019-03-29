@@ -39,11 +39,22 @@
   (reduce
     (fn [widths column]
         (let [column-key (get-keyword column)]
-             (merge widths {column-key (apply max (get-column-lengths column-key records))})))
+             (merge widths
+                    {column-key (apply max (get-column-lengths column-key records))})))
     {}
     columns))
 
+(defn get-table-length
+  [column-max-lengths]
+  (reduce-kv
+    (fn [table-length column-key column-length]
+        (+ column-length table-length))
+    0
+    column-max-lengths))
+
 (defn create
   [title columns records]
-  (println (get-column-max-lengths columns records))
-  "Here is your table!")
+  (let [column-max-lengths (get-column-max-lengths columns records)
+        table-length (get-table-length column-max-lengths)]
+        (str
+          (center-pad title table-length))))
