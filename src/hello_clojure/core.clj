@@ -1,5 +1,6 @@
 (ns hello-clojure.core
   (:gen-class))
+(require 'table)
 
 (defn get-current-year
   []
@@ -29,6 +30,59 @@
 (defn sort-by-age
   [people]
   (sort-by (fn [person] (get-age person)) people))
+
+(defn repeat
+  [c n]
+  (if (= n 1)
+      (str c "\n")
+      (str c (repeat c (- n 1)))))
+
+(defn get-header
+  [column-names]
+  (str
+    (reduce
+      (fn [columns column]
+          (if (= columns "")
+              (format "%-16s" column)
+              (str columns " | " (format "%-16s" column))))
+      ""
+      column-names)
+    "\n"))
+
+(defn get-row
+  [map]
+  (str
+    (reduce-kv
+      (fn [m k v]
+          (if (= m "")
+              (format "%-16s" v)
+              (str m " | " (format "%-16s" v))))
+      ""
+      map)
+    "\n"))
+
+(defn get-table
+  [title column-names records]
+  (str
+    title "\n"
+    (repeat "-" 41)
+    (get-header column-names)
+    (repeat "-" 41)
+    (reduce
+      (fn [rows row]
+        (str rows (get-row row)))
+        ""
+      records)))
+
+(defn show-table
+  []
+  (println
+    (get-table
+      "Seinfeld Cast"
+      ["Character" "Actor" "Age"]
+      [{:character "George Costanza" :actor "Jason Alexander"  :age 25}
+       {:character "Jerry Seinfeld"  :actor "Jerry Seinfeld"   :age 26}
+       {:character "Cosmo Kramer"    :actor "Michael Richards" :age 27}])))
 
 (defn -main
   [& args]
