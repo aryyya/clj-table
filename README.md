@@ -1,4 +1,4 @@
-# hello-clojure
+# clj-table
 
 Testing out Clojure and Leiningen by making a generic table generator.
 
