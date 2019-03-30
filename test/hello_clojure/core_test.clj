@@ -1,6 +1,6 @@
-(ns hello-clojure.core-test
+(ns clj-table.core-test
   (:require [clojure.test :refer :all]
-            [hello-clojure.core :refer :all]))
+            [clj-table.core :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."

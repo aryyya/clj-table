@@ -1,4 +1,4 @@
-(ns hello-clojure.table)
+(ns clj-table.table)
 (load "utility")
 
 (defn repeat-character
@@ -22,7 +22,7 @@
 (defn center-pad
   [string width]
   (if (< (count (str string)) width)
-    (if (hello-clojure.utility/is-one-off (count (str string)) width)
+    (if (clj-table.utility/is-one-off (count (str string)) width)
       (left-pad string width)
       (center-pad (str " " string " ") width))
     string))

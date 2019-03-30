@@ -2,7 +2,7 @@
 
 Testing out Clojure and Leiningen by making a generic table generator.
 
-The function `(hello-clojure.table/create)` takes a title, a list of columns and a vector of records to display.
+The function `(clj-table.table/create)` takes a title, a list of columns and a vector of records to display.
 
 The width and alignments of the table and each column is automatically determined to accommodate the size of the data provided.
 

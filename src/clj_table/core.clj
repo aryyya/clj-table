@@ -1,4 +1,4 @@
-(ns hello-clojure.core
+(ns clj-table.core
   (:gen-class))
 
 (load "table")
@@ -34,7 +34,7 @@
 (defn -main
   [& args]
   (println
-   (hello-clojure.table/create
+   (clj-table.table/create
     "Seinfeld Cast (by age)"
     ["Character" "Actor" "Born"]
     (sort-by-age (get-people)))))

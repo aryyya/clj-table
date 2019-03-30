@@ -1,3 +1,3 @@
-# Introduction to hello-clojure
+# Introduction to clj-table
 
 TODO: write [great documentation](http://jacobian.org/writing/what-to-write/)

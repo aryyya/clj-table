@@ -1,4 +1,4 @@
-(ns hello-clojure.utility)
+(ns clj-table.utility)
 
 (defn absolute-value
   [n]
