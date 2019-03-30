@@ -34,7 +34,7 @@
 (defn -main
   [& args]
   (println
-    (hello-clojure.table/create
-      "Seinfeld Cast (by age)"
-      ["Character" "Actor" "Born"]
-      (sort-by-age (get-people)))))
+   (hello-clojure.table/create
+    "Seinfeld Cast (by age)"
+    ["Character" "Actor" "Born"]
+    (sort-by-age (get-people)))))
