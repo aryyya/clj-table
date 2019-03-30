@@ -1,6 +1,7 @@
 (ns hello-clojure.core
   (:gen-class))
-(require 'table)
+
+(load "table")
 
 (defn get-current-year
   []
@@ -16,6 +17,10 @@
   [person]
   (- (get-current-year) (:born person)))
 
+(defn sort-by-age
+  [people]
+  (sort-by (fn [person] (get-age person)) people))
+
 (defn get-people
   []
   [(get-person "Jerry Seinfeld"  "Jerry Seinfeld"      1954)
@@ -26,14 +31,10 @@
    (get-person "Newman"          "Wayne Knight"        1955)
    (get-person "J. Peterman"     "John O'Hurley"       1954)])
 
-(defn sort-by-age
-  [people]
-  (sort-by (fn [person] (get-age person)) people))
-
 (defn -main
   [& args]
   (println
-    (table/create
+    (hello-clojure.table/create
       "Seinfeld Cast (by age)"
       ["Character" "Actor" "Born"]
       (sort-by-age (get-people)))))

@@ -1,5 +1,5 @@
-(ns table)
-(require 'utility)
+(ns hello-clojure.table)
+(load "utility")
 
 (defn repeat-character
   [character n]
@@ -22,7 +22,7 @@
 (defn center-pad
   [string width]
   (if (< (count (str string)) width)
-      (if (utility/is-one-off (count (str string)) width)
+      (if (hello-clojure.utility/is-one-off (count (str string)) width)
           (left-pad string width)
           (center-pad (str " " string " ") width))
       string))
