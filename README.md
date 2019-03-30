@@ -8,11 +8,13 @@ The width and alignments of the table and each column is automatically determine
 
 ## Compile and Execute
 
+You need Java, Clojure and Leiningen.
+
 ```bash
 $ lein run
 ```
 
-Sample output:
+## Sample Output
 
 ```
 -----------------------------------------------
