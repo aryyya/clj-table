@@ -1,22 +1,28 @@
 (ns table)
 (require 'utility)
 
+(defn repeat-character
+  [character n]
+  (if (> n 1)
+      (str character (repeat-character character (- n 1)))
+      character))
+
 (defn left-pad
   [string width]
-  (if (< (count string) width)
+  (if (< (count (str string)) width)
       (left-pad (str string " ") width)
       string))
 
 (defn right-pad
   [string width]
-  (if (< (count string) width)
+  (if (< (count (str string)) width)
       (right-pad (str " " string) width)
       string))
 
 (defn center-pad
   [string width]
-  (if (< (count string) width)
-      (if (utility/is-one-off (count string) width)
+  (if (< (count (str string)) width)
+      (if (utility/is-one-off (count (str string)) width)
           (left-pad string width)
           (center-pad (str " " string " ") width))
       string))
@@ -40,7 +46,7 @@
     (fn [widths column]
         (let [column-key (get-keyword column)]
              (merge widths
-                    {column-key (apply max (get-column-lengths column-key records))})))
+                    {column-key (+ 3 (apply max (get-column-lengths column-key records)))})))
     {}
     columns))
 
@@ -52,9 +58,50 @@
     0
     column-max-lengths))
 
+(defn get-header
+  [columns column-max-lengths]
+  (reduce
+    (fn [output column]
+      (str output (left-pad column ((keyword (clojure.string/lower-case column)) column-max-lengths))))
+    ""
+    columns))
+
+(defn get-row
+  [columns column-max-lengths record]
+  (str
+    (reduce
+      (fn [output column]
+          (let [column-key (keyword (clojure.string/lower-case column))]
+              (str
+                output
+                (left-pad (column-key record)
+                          (column-key column-max-lengths)))))
+      ""
+      columns)
+    "\n"))
+
+(defn get-rows
+  [columns column-max-lengths records]
+  (reduce
+    (fn [output record]
+        (str output (get-row columns column-max-lengths record)))
+    ""
+    records))
+
 (defn create
   [title columns records]
   (let [column-max-lengths (get-column-max-lengths columns records)
         table-length (get-table-length column-max-lengths)]
         (str
-          (center-pad title table-length))))
+          (repeat-character "-" table-length)
+          "\n"
+          (center-pad (clojure.string/upper-case title) table-length)
+          "\n"
+          (repeat-character "-" table-length)
+          "\n"
+          (get-header columns column-max-lengths)
+          "\n"
+          (repeat-character "-" table-length)
+          "\n"
+          (get-rows columns column-max-lengths records)
+          (repeat-character "-" table-length))))
