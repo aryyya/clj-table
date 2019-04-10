@@ -1,4 +1,5 @@
 (ns clj-table.table)
+(require '[clojure.string :as string])
 (load "utility")
 
 (defn repeat-character
@@ -29,7 +30,7 @@
 
 (defn get-keyword
   [string]
-  (keyword (clojure.string/lower-case string)))
+  (keyword (string/lower-case string)))
 
 (defn get-column-lengths
   [column-key records]
@@ -62,7 +63,7 @@
   [columns column-max-lengths]
   (reduce
     (fn [output column]
-      (str output (left-pad column ((keyword (clojure.string/lower-case column)) column-max-lengths))))
+      (str output (left-pad column ((keyword (string/lower-case column)) column-max-lengths))))
     ""
     columns))
 
@@ -71,7 +72,7 @@
   (str
    (reduce
     (fn [output column]
-      (let [column-key (keyword (clojure.string/lower-case column))]
+      (let [column-key (keyword (string/lower-case column))]
         (str
          output
          (left-pad (column-key record)
@@ -95,7 +96,7 @@
     (str
      (repeat-character "-" table-length)
      "\n"
-     (center-pad (clojure.string/upper-case title) table-length)
+     (center-pad (string/upper-case title) table-length)
      "\n"
      (repeat-character "-" table-length)
      "\n"
